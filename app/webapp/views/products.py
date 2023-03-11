@@ -1,49 +1,39 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import get_object_or_404, render, redirect
-
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from webapp.models import Product
-
 from webapp.forms import ProductForm
 
 
-def detail_view(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {'product': product}
-    return render(request, 'detail.html', context=context)
+class ProductDetail(DetailView):
+    template_name = 'detail.html'
+    model = Product
+    context_object_name = 'product'
 
 
-def add_view(request: WSGIRequest):
-    if request.method == "GET":
-        form = ProductForm()
-        return render(request, 'add.html', context={'form': form})
-    form = ProductForm(data=request.POST)
-    if not form.is_valid():
-        return render(request, 'add.html', context={'form': form})
-    else:
-        Product.objects.create(**form.cleaned_data)
-        return redirect('index_page')
+class TaskAddView(CreateView):
+    template_name = 'add.html'
+    model = Product
+    context_object_name = 'product'
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse('details', kwargs={'pk': self.object.pk})
 
 
-def update_view(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    if request.method == 'GET':
-        form = ProductForm(instance=product)
-        return render(request, 'update.html', {'form': form, 'product': product})
-    elif request.method == 'POST':
-        form = ProductForm(request.POST, instance=product)
-        if form.is_valid():
-            product.save()
-            return redirect('index_page')
-        else:
-            return render(request, 'update.html', {'form': form, 'product': product})
+class TaskUpdateView(UpdateView):
+    template_name = 'update.html'
+    form_class = ProductForm
+    model = Product
+    context_object_name = 'product'
+
+    def get_success_url(self):
+        return reverse('details', kwargs={'pk': self.object.pk})
 
 
-def delete_view(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'confirm_delete.html', context={"product": product})
-
-
-def confirm_delete(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    product.delete()
-    return redirect('index_page')
+class TaskDeleteView(DeleteView):
+    template_name = 'confirm_delete.html'
+    context_object_name = 'product'
+    model = Product
+    success_url = reverse_lazy('index_page')

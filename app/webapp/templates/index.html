@@ -8,7 +8,11 @@
     </li>
 {% endblock %}
 {% block content %}
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <form class="d-flex" role="search" method="GET">
+        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-dark" type="submit" >Search</button>
+    </form>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 20px">
         {% for product in products %}
             <div class="col">
                 <div class="card h-100" style="height: 200px;width: 300px;">
@@ -23,4 +27,7 @@
             </div>
         {% endfor %}
     </div>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}

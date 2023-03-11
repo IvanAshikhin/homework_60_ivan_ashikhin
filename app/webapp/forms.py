@@ -31,3 +31,7 @@ class ProductForm(forms.ModelForm):
             'remain': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
             'cost': DecimalInput(attrs={'class': 'form-control'})
         }
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=20, required=False, label='Find')
