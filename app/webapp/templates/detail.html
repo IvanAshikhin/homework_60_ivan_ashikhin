@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+ Detail
+{% endblock %}
+{% block menu %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'product_update' product.pk  %}">Update Product</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <img src="{{ product.image }}" alt="" style="height: 400px; width: 600px;padding-top: 30px" class="img-fluid">
+    <h1 class="name">{{ product.product_name }}</h1>
+    <p class="category">Category: {{ product.category }}</p>
+    <p class="cost">Cost: {{ product.cost }}</p>
+    <p class="desc">Description: {{ product.description }}</p>
+    <p class="desc">Remain: {{ product.remain }}</p>
+    <a class="delete_prod" href="{% url 'delete_product' product.pk %}">Delete</a>
+{% endblock %}
+
+
+
