@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Shopping Cart
+{% endblock %}
+
+{% block menu %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index_page' %}">Home</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Count</th>
+                <th scope="col">Total Cost</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product_cart in object_list %}
+                <tr>
+                    <td>{{ product_cart.product.product_name }}</td>
+                    <td>{{ product_cart.product.cost }}</td>
+                    <td>{{ product_cart.count }}</td>
+                    <td>
+                        <form action="{% url 'remove_from_cart' pk=product_cart.product.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-dark">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">Total Cost:</td>
+                <td>{{ total_cost }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
