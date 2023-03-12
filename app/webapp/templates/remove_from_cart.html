@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Delete product from cart</h1>
+  <p>Are you sure you want to delete "{{ product_cart.product.name }}" from your cart?</p>
+  <form action="{% url 'delete_cart' product_cart.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-dark">Delete</button>
+    <a href="{% url 'cart' %}" class="btn btn-dark">Cancel</a>
+  </form>
+{% endblock %}

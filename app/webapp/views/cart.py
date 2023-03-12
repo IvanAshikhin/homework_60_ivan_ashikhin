@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404, redirect, render
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, DeleteView
 from django.urls import reverse_lazy
@@ -35,13 +34,12 @@ class CartView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        total_cost = sum([product.product.remain * product.count for product in context['object_list']])
+        total_cost = sum([product.product.cost * product.count for product in context['object_list']])
         context['total_cost'] = total_cost
         return context
 
 
-class RemoveFromCartView(DeleteView):
-    template_name = 'remove_from_cart.html'
+class DeleteCartView(DeleteView):
     model = ProductCart
     success_url = reverse_lazy('cart')
-
+    template_name = 'remove_from_cart.html'

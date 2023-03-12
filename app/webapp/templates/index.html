@@ -7,7 +7,9 @@
         <a class="nav-link" href="{% url 'add_product' %}">Add Product</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+        <a class="nav-link" href="{% url 'cart' %}"><svg width="26" height="26" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M13.5 21c-.276 0-.5-.224-.5-.5s.224-.5.5-.5.5.224.5.5-.224.5-.5.5m0-2c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5m-6 2c-.276 0-.5-.224-.5-.5s.224-.5.5-.5.5.224.5.5-.224.5-.5.5m0-2c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5m16.5-16h-2.964l-3.642 15h-13.321l-4.073-13.003h19.522l.728-2.997h3.75v1zm-22.581 2.997l3.393 11.003h11.794l2.674-11.003h-17.861z"/>
+        </svg></a>
     </li>
 {% endblock %}
 {% block content %}
@@ -15,11 +17,11 @@
         <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-dark" type="submit">Search</button>
     </form>
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 20px">
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 20px; margin-bottom: 30px">
         {% for product in products %}
             <div class="col">
-                <div class="card h-100" style="height: 200px;width: 300px;">
-                    <img src="{{ product.image }}" class="card-img-top" style="width: 295px; height: 150px" alt="...">
+                <div class="card h-100" style="height: 170px;width: 280px;">
+                    <img src="{{ product.image }}" class="card-img-top" style="width: 270px; height: 150px" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.product_name }}</h5>
                         <p class="card-text">{{ product.category }}</p>
