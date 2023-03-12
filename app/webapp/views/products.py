@@ -12,7 +12,7 @@ class ProductDetail(DetailView):
     context_object_name = 'product'
 
 
-class TaskAddView(CreateView):
+class ProductAddView(CreateView):
     template_name = 'add.html'
     model = Product
     context_object_name = 'product'
@@ -22,7 +22,7 @@ class TaskAddView(CreateView):
         return reverse('details', kwargs={'pk': self.object.pk})
 
 
-class TaskUpdateView(UpdateView):
+class ProductUpdateView(UpdateView):
     template_name = 'update.html'
     form_class = ProductForm
     model = Product
@@ -32,7 +32,7 @@ class TaskUpdateView(UpdateView):
         return reverse('details', kwargs={'pk': self.object.pk})
 
 
-class TaskDeleteView(DeleteView):
+class ProductDeleteView(DeleteView):
     template_name = 'confirm_delete.html'
     context_object_name = 'product'
     model = Product

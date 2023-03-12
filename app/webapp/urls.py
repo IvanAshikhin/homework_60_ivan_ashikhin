@@ -1,15 +1,19 @@
 from django.urls import path
 from webapp.views.base import IndexView
 from webapp.views.products import ProductDetail
-from webapp.views.products import TaskAddView
-from webapp.views.products import TaskUpdateView
-from webapp.views.products import TaskDeleteView
+from webapp.views.products import ProductAddView, ProductUpdateView, ProductDeleteView
+from webapp.views.cart import AddToCartView
+from webapp.views.cart import CartView
+from webapp.views.cart import RemoveFromCartView
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index_page"),
     path('products/<int:pk>', ProductDetail.as_view(), name='details'),
-    path('products/add/', TaskAddView.as_view(), name="add_product"),
-    path('products/<int:pk>/update', TaskUpdateView.as_view(), name='product_update'),
-    path('products/<int:pk>/delete', TaskDeleteView.as_view(), name='delete_product'),
+    path('products/add/', ProductAddView.as_view(), name="add_product"),
+    path('products/<int:pk>/update', ProductUpdateView.as_view(), name='product_update'),
+    path('products/<int:pk>/delete', ProductDeleteView.as_view(), name='delete_product'),
+    path('add_to_cart/<int:pk>/', AddToCartView.as_view(), name='add_to_cart'),
+    path('cart/', CartView.as_view(), name='cart'),
+    path('cart/remove/<int:pk>/', RemoveFromCartView.as_view(), name='remove_from_cart'),
 
 ]

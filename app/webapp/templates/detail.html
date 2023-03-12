@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}
- Detail
+    Detail
 {% endblock %}
 {% block menu %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'product_update' product.pk  %}">Update Product</a>
+        <a class="nav-link" href="{% url 'product_update' product.pk %}">Update Product</a>
     </li>
 {% endblock %}
 {% block content %}
@@ -14,7 +14,15 @@
     <p class="cost">Cost: {{ product.cost }}</p>
     <p class="desc">Description: {{ product.description }}</p>
     <p class="desc">Remain: {{ product.remain }}</p>
-    <a class="delete_prod" href="{% url 'delete_product' product.pk %}">Delete</a>
+    <a class="delete_prod" href="{% url 'delete_product' product.pk %}" style="margin-bottom: 10px">Delete</a>
+    {% if product.remain > 0 %}
+        <form action="{% url 'add_to_cart' product.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-dark mt-4">Add to cart</button>
+        </form>
+    {% else %}
+        <p>Out of stock</p>
+    {% endif %}
 {% endblock %}
 
 

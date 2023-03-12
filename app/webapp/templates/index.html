@@ -6,11 +6,14 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'add_product' %}">Add Product</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+    </li>
 {% endblock %}
 {% block content %}
     <form class="d-flex" role="search" method="GET">
         <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-dark" type="submit" >Search</button>
+        <button class="btn btn-outline-dark" type="submit">Search</button>
     </form>
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 20px">
         {% for product in products %}
@@ -22,6 +25,14 @@
                         <p class="card-text">{{ product.category }}</p>
                         <p class="card-text">{{ product.cost }}</p>
                         <a href="{% url 'details' product.pk %}" class="btn btn-dark">See more</a>
+                        {% if product.remain > 0 %}
+                            <form action="{% url 'add_to_cart' product.pk %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-dark mt-2">Add to cart</button>
+                            </form>
+                        {% else %}
+                            <p>Out of stock</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -31,3 +42,4 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
 {% endblock %}
+
