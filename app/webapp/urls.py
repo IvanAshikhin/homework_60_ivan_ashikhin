@@ -5,6 +5,7 @@ from webapp.views.products import ProductAddView, ProductUpdateView, ProductDele
 from webapp.views.cart import AddToCartView
 from webapp.views.cart import CartView
 from webapp.views.cart import DeleteCartView
+from webapp.views.order import OrderCreateView
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index_page"),
@@ -15,5 +16,6 @@ urlpatterns = [
     path('add_to_cart/<int:pk>/', AddToCartView.as_view(), name='add_to_cart'),
     path('cart/', CartView.as_view(), name='cart'),
     path('cart/remove/<int:pk>/', DeleteCartView.as_view(), name='delete_cart'),
+    path('cart/createorder/', OrderCreateView.as_view(), name='create_order'),
 
 ]

@@ -1,5 +1,6 @@
 from django import forms
 from webapp.models import Product
+from webapp.models import Order
 
 
 class DecimalInput(forms.TextInput):
@@ -35,3 +36,14 @@ class ProductForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=20, required=False, label='Find')
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['username', 'phone', 'address']
+        labels = {
+            'username': 'Name',
+            'phone': 'Phone number',
+            'address': 'Address',
+        }

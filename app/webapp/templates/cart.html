@@ -18,7 +18,6 @@
             <th scope="col">Price</th>
             <th scope="col">Count</th>
             <th scope="col">Delete</th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +37,12 @@
         <tr>
             <td colspan="3">Total Cost:</td>
             <td>{{ total_cost }}</td>
-            <td></td>
+            <td>
+                <form action="{% url 'create_order' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-dark">Create Order</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
