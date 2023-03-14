@@ -1,5 +1,3 @@
-from django.core.handlers.wsgi import WSGIRequest
-from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from webapp.models import Product

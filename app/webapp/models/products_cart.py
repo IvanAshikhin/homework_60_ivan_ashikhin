@@ -1,5 +1,4 @@
 from django.db import models
-
 from webapp.models.product import Product
 
 
