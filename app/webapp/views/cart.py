@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db.models import F
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, DeleteView
 from django.urls import reverse_lazy
@@ -45,7 +46,7 @@ class CartView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.select_related('product')
+        return queryset.select_related('product').annotate(subtotal=F('product__cost') * F('count'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

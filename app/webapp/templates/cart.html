@@ -14,6 +14,7 @@
             <th scope="col">Product Name</th>
             <th scope="col">Price</th>
             <th scope="col">Count</th>
+            <th scope="col">Subtotal</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ product_cart.product.product_name }}</td>
                 <td>{{ product_cart.product.cost }}</td>
                 <td>{{ product_cart.count }}</td>
+                <td>{{ product_cart.subtotal }}</td>
                 <td>
                     <form action="{% url 'delete_cart' pk=product_cart.pk %}" method="post">
                         {% csrf_token %}
